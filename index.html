@@ -95,20 +95,20 @@
 								<header>
 									<h2>Contact Me</h2>
 								</header>
-								<form action="#" method="post">
+								<form name="submit-to-google-sheet" action="#" method="post">
 									<div>
 										<div class="row">
 											<div class="col-6 col-12-medium">
-												<input type="text" name="name" placeholder="Name" />
+												<input type="text" name="Name" placeholder="Name" />
 											</div>
 											<div class="col-6 col-12-medium">
-												<input type="text" name="email" placeholder="Email" />
+												<input type="text" name="Email" placeholder="Email" />
 											</div>
 											<div class="col-12">
-												<input type="text" name="subject" placeholder="Subject" />
+												<input type="text" name="Subject" placeholder="Subject" />
 											</div>
 											<div class="col-12">
-												<textarea name="message" placeholder="Message" rows="6"></textarea>
+												<textarea name="Message" placeholder="Message" rows="6"></textarea>
 											</div>
 											<div class="col-12">
 												<input type="submit" value="Send Message" />
@@ -116,6 +116,7 @@
 										</div>
 									</div>
 								</form>
+								<span id="msg"></span>
 							</article>
 
 					</div>
@@ -135,6 +136,24 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				const scriptURL = 'https://script.google.com/macros/s/AKfycbxO3c61Lh-7ihRtOEWI1tb9k3qN7PDw-BnIBK-W69AiBrVJ9DgRQTw4To_YSmGmocXG/exec'
+				const form = document.forms['submit-to-google-sheet']
+				const msg = document.getElementById("msg")
+			  
+				form.addEventListener('submit', e => {
+				  e.preventDefault()
+				  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+					.then(response => {
+						msg.innerHTML = "Message sent successfully"
+						setTimeout(function() {
+							msg.innerHTML=""
+						}, 5000)
+						form.reset()
+					})
+					.catch(error => console.error('Error!', error.message))
+				})
+			  </script>
 
 	</body>
 </html>
