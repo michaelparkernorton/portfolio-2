@@ -2037,7 +2037,7 @@ input, select, textarea {
 						-moz-object-position: center;
 						-webkit-object-position: center;
 						-ms-object-position: center;
-						object-position: center;
+						object-position: 0% 20%;
 					}
 
 					#main > .panel.intro .pic .arrow {
